@@ -65,4 +65,15 @@ class Mortgage:
         except Exception as e:
             raise ValueError("Frequency provided is invalid.")
         
+    @property
+    def amortization(self):
+        """Accessor for amortization attribute"""
+        return self.__amortization
+    
+    @amortization.setter
+    def amortization(self, value):
+        try:
+            self.__amortization = Mortgage[value]
+        except Exception as e:
+            raise ValueError("Amortization provided is invalid.")
         

@@ -120,7 +120,7 @@ class MortgageTests(TestCase):
 
         #Act
         with self.assertRaises(ValueError) as context:
-            correct_frequency.frequency = "not valid"
+            correct_frequency.frequency = "not_valid"
 
         #Assert
         self.assertEqual(str(context.exception), error_message)
@@ -130,6 +130,27 @@ class MortgageTests(TestCase):
         correct_frequency = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
 
         #Act
+
         #Assert
         self.assertEqual(correct_frequency.frequency, PaymentFrequency.BI_WEEKLY)
-    
+
+    def test_amortization_invalid(self):
+        #Arrange
+        error_message = "Amortization provided is invalid."
+        correct_amortization = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            correct_amortization.amortization = "not_valid"
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+
+    def test_amortization_valid(self):
+        #Arrange
+        correct_amortization = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+
+        #Assert
+        self.assertEqual(correct_amortization.amortization, 25)
