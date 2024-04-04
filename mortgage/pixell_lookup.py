@@ -21,6 +21,6 @@ class MortgageRate(Enum):
     VARIABLE_1 = 0.0679
 
 class PaymentFrequency(Enum):
-    MONTHLY: 12
-    BI_WEEKLY: 26
-    WEEKLY: 52
+    MONTHLY = 12
+    BI_WEEKLY = 26
+    WEEKLY = 52

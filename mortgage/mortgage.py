@@ -29,3 +29,16 @@ class Mortgage:
             raise ValueError("Amortization provided is invalid")
         else:
             self.__amortization = amortization
+    
+    @property
+    def loan_amount(self):
+        """Accessor for loan_amount attribute"""
+        return self.__loan_amount
+    
+    @loan_amount.setter
+    def loan_amount(self, value):
+        if value <= 0:
+            raise ValueError("Loan amount must be positive")
+        self.__loan_amount = value
+
+    

@@ -12,33 +12,83 @@ from mortgage.pixell_lookup import MortgageRate, PaymentFrequency
 class MortgageTests(TestCase):
     def test_init_invalid_amount_input(self):
         #Arrange
+        error_message = "Loan amount must be positive"
 
-        #Act / Assert
-        with self.assertRaises(ValueError):
+        #Act
+        with self.assertRaises(ValueError) as context:
             Mortgage(-69.00, "FIXED_3", "BI_WEEKLY", 30) 
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
 
     def test_init_invalid_rate_input(self):
         #Arrange
+        error_message = "Rate provided is invalid."
 
-        #Act / Asseert
-        with self.assertRaises(ValueError):
+        #Act 
+        with self.assertRaises(ValueError) as context:
             Mortgage(2500, "not_valid", "BI_WEEKLY", 30)
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
 
     def test_init_invalid_frequency_input(self):
         #Arrange
+        error_message = "Frequency provided is invalid."
             
-        #Act / Assert
-        with self.assertRaises(ValueError):
+        #Act 
+        with self.assertRaises(ValueError) as context:
             Mortgage(2500, "FIXED_3", "not_valid", 30)
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
 
     def test_init_invalid_amortization_input(self):
         #Arrange
+        error_message = "Amortization provided is invalid"
 
-        #Act / Assert
-        with self.assertRaises(ValueError):
+        #Act 
+        with self.assertRaises(ValueError) as context:
             Mortgage(2500, "FIXED_3", "BI_WEEKLY", 69)
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+
     #def test_init_invalid_correct_attributes(self):
         #Arrange
         #Act
         #Assert
+        #This shows up later in step 14
 
+    def test_loan_amount_negative(self):
+        #Arrange
+        error_message = "Loan amount must be positive"
+        correct_mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            correct_mortgage.loan_amount = -500
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+            
+    def test_loan_amount_zero(self):
+        #Arrange
+        error_message = "Loan amount must be positive"
+        correct_mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            correct_mortgage.loan_amount = 0
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+
+    def test_loan_amount_positive(self):
+        #Arrange
+        correct_mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+
+        #Assert
+        self.assertEqual(correct_mortgage.loan_amount, 2500) 
