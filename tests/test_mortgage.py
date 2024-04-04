@@ -12,7 +12,7 @@ from mortgage.pixell_lookup import MortgageRate, PaymentFrequency
 class MortgageTests(TestCase):
     def test_init_invalid_amount_input(self):
         #Arrange
-        error_message = "Loan amount must be positive"
+        error_message = "Loan amount must be positive."
 
         #Act
         with self.assertRaises(ValueError) as context:
@@ -45,7 +45,7 @@ class MortgageTests(TestCase):
 
     def test_init_invalid_amortization_input(self):
         #Arrange
-        error_message = "Amortization provided is invalid"
+        error_message = "Amortization provided is invalid."
 
         #Act 
         with self.assertRaises(ValueError) as context:
@@ -62,7 +62,7 @@ class MortgageTests(TestCase):
 
     def test_loan_amount_negative(self):
         #Arrange
-        error_message = "Loan amount must be positive"
+        error_message = "Loan amount must be positive."
         correct_mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
 
         #Act
@@ -74,7 +74,7 @@ class MortgageTests(TestCase):
             
     def test_loan_amount_zero(self):
         #Arrange
-        error_message = "Loan amount must be positive"
+        error_message = "Loan amount must be positive."
         correct_mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
 
         #Act
@@ -92,3 +92,23 @@ class MortgageTests(TestCase):
 
         #Assert
         self.assertEqual(correct_mortgage.loan_amount, 2500) 
+
+    def test_rate_invalid(self):
+        #Arrange
+        error_message = "Rate provided is invalid."
+        correct_rate = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            correct_rate.rate = "not_valid"
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+
+    def test_rate_valid(self):
+        #Arrange
+        correct_rate = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+        #Act
+
+        #Assert
+        self.assertEqual(correct_rate.rate, MortgageRate.FIXED_3)
