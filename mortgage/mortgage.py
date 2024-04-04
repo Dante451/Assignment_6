@@ -52,3 +52,17 @@ class Mortgage:
             self.__rate = MortgageRate[value]
         except Exception as e:
             raise ValueError("Rate provided is invalid.")
+        
+    @property
+    def frequency(self):
+        """Accessor for frequency attribute"""
+        return self.__frequency
+    
+    @frequency.setter
+    def frequency(self, value):
+        try: 
+            self.__frequency = Mortgage[value]
+        except Exception as e:
+            raise ValueError("Frequency provided is invalid.")
+        
+        

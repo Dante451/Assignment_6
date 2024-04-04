@@ -54,7 +54,7 @@ class MortgageTests(TestCase):
         #Assert
         self.assertEqual(str(context.exception), error_message)
 
-    #def test_init_invalid_correct_attributes(self):
+    #def test_init_correct_attributes(self):
         #Arrange
         #Act
         #Assert
@@ -112,3 +112,24 @@ class MortgageTests(TestCase):
 
         #Assert
         self.assertEqual(correct_rate.rate, MortgageRate.FIXED_3)
+
+    def test_frequency_invalid(self):
+        #Arrange
+        error_message = "Frequency provided is invalid."
+        correct_frequency = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            correct_frequency.frequency = "not valid"
+
+        #Assert
+        self.assertEqual(str(context.exception), error_message)
+    
+    def test_frequency_valid(self):
+        #Arrange
+        correct_frequency = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        #Assert
+        self.assertEqual(correct_frequency.frequency, PaymentFrequency.BI_WEEKLY)
+    
