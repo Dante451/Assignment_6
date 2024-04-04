@@ -54,11 +54,15 @@ class MortgageTests(TestCase):
         #Assert
         self.assertEqual(str(context.exception), error_message)
 
-    #def test_init_correct_attributes(self):
+    def test_init_correct_attributes(self):
         #Arrange
+        correct_everything = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
         #Act
         #Assert
-        #This shows up later in step 14
+        self.assertEqual(correct_everything.loan_amount, 2500)
+        self.assertEqual(correct_everything.rate, MortgageRate.FIXED_3)
+        self.assertEqual(correct_everything.frequency, PaymentFrequency.BI_WEEKLY)
+        self.assertEqual(correct_everything.amortization, 25)
 
     def test_loan_amount_negative(self):
         #Arrange
