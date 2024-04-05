@@ -29,7 +29,7 @@ class Mortgage:
             raise ValueError("Amortization provided is invalid.")
         else:
             self.__amortization = amortization
-    
+        
     @property
     def loan_amount(self):
         """Accessor for loan_amount attribute"""
@@ -77,3 +77,11 @@ class Mortgage:
         except Exception as e:
             raise ValueError("Amortization provided is invalid.")
         
+    def calculate_payment(self)->float:
+        i = self.rate / self.frequency
+        n = self.amortization * self.frequency
+        numerator = (i * (1 + i)) ** n
+        denominator = ((1 + i) ** n) -1
+        p = self.loan_amount
+        m = p * (numerator / denominator)
+        return m
