@@ -6,7 +6,7 @@ Usage: Use the tests encapsulated within this class to test the MortgagePayment 
 """
 #python -m unittest -v tests/test_mortgage.py 
 from unittest import TestCase 
-from mortgage.mortgage import Mortgage 
+from mortgage.mortgage import Mortgage
 from mortgage.pixell_lookup import MortgageRate, PaymentFrequency
 
 class MortgageTests(TestCase):
@@ -158,3 +158,14 @@ class MortgageTests(TestCase):
 
         #Assert
         self.assertEqual(correct_amortization.amortization, 25)
+
+    def test_calculate_payment_correct(self):
+        #Arrange
+        expected_value = 7.35
+        mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        actual_value = mortgage.calculate_payment()
+
+        #Assert
+        self.assertAlmostEqual(expected_value, actual_value, places = 2)
