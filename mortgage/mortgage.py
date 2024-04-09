@@ -88,3 +88,12 @@ class Mortgage:
         i = rate / frequency
         M = P * (i * (1 + i) ** n) / ((1 + i) ** n - 1)
         return M
+    
+    def __str__(self):
+        rate = self.__rate.value * 100
+        round(rate, 2)
+        return (f"Mortgage Amount: ${self.loan_amount:,.2f} "
+        f"Rate: {rate}% "
+        f"Frequency: {self.frequency.name} "
+        f"Amortization: {self.__amortization} "
+        f"-- Calculated Payment: ${self.calculate_payment():,.2f} ")
