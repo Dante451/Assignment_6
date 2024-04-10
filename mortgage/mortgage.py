@@ -9,22 +9,49 @@ from mortgage.pixell_lookup import MortgageRate, PaymentFrequency, VALID_AMORTIZ
 
 class Mortgage:
     def __init__(self, loan_amount: float, rate: str, frequency: str, amortization: int):
+        """
+        This method takes in the class and initiates the loan variable
 
+        Args: None
+
+        Returns: None
+        """
         if loan_amount <= 0:
             raise ValueError("Loan amount must be positive.")
         else:
             self.__loan_amount = loan_amount
 
+        """
+        This method takes in the class and initiates the rate variable
+
+        Args: None
+
+        returns: None
+        """
         try:
             self.__rate = MortgageRate[rate]
         except Exception as e:
             raise ValueError("Rate provided is invalid.")
     
+        """
+        This method takes in the class and initiates the frequency variable
+
+        Args: None
+
+        returns: None
+        """
         try:
             self.__frequency = PaymentFrequency[frequency]
         except Exception as e:
             raise ValueError("Frequency provided is invalid.")
-    
+
+        """
+        This method takes in the class and initiates the amortization variable
+
+        Args: None
+
+        returns: None
+        """
         if amortization not in VALID_AMORTIZATION:
             raise ValueError("Amortization provided is invalid.")
         else:
@@ -78,10 +105,10 @@ class Mortgage:
             raise ValueError("Amortization provided is invalid.")
         
     def calculate_payment(self)->float:
+        loan_amount = self.__loan_amount
         rate = self.__rate.value
         frequency = self.__frequency.value
         amortization = self.__amortization
-        loan_amount = self.__loan_amount
 
         P = loan_amount
         n = amortization * frequency
