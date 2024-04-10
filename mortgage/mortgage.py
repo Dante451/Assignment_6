@@ -97,3 +97,6 @@ class Mortgage:
         f"Frequency: {self.frequency.name} "
         f"Amortization: {self.__amortization} "
         f"-- Calculated Payment: ${self.calculate_payment():,.2f} ")
+    
+    def __repr__(self):
+        return f"({self.loan_amount}, {self.rate.value}, {self.frequency.value}, {self.__amortization})"

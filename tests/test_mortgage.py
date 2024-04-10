@@ -202,3 +202,14 @@ class MortgageTests(TestCase):
 
         #Assert
         self.assertEqual(expected, actual)
+
+    def test_repr(self):
+        #Arrange
+        expected = ("(2500, 0.0589, 26, 25)")
+        mortgage = Mortgage(2500, "FIXED_3", "BI_WEEKLY", 25)
+
+        #Act
+        actual = repr(mortgage)
+
+        #Assert
+        self.assertEqual(expected, actual)
