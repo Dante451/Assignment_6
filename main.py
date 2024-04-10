@@ -8,14 +8,16 @@ Date: {Date}
 
 ### REQUIREMENT
 ### ADD IMPORT STATEMENT FOR THE MORTGAGE CLASS
-
+from mortgage.mortgage import Mortgage
 
 
 ### REQUIREMENT
 ### ENCLOSE THE FOLLOWING 'WITH OPEN' BLOCK IN A 'TRY-EXCEPT' BLOCK WHICH 
 ### WILL CATCH A 'FILENOTFOUNDERROR' EXCEPTION
-with open ("data\\pixell_river_mortgages.txt","r") as input:
-    print("**************************************************")
+
+try:
+    with open ("data\\pixell_river_mortgages.txt","r") as input:
+        print("**************************************************")
     
     for data in input:
         items = data.split(",")
@@ -29,11 +31,11 @@ with open ("data\\pixell_river_mortgages.txt","r") as input:
             ### REQUIREMENT:
             ### INSTANTIATE A MORTGAGE OBJECT USING THE VALUES
             ### FOR AMOUNT, RATE, FREQUENCY AND AMORTIZATION ABOVE.
-
+            mortgage_var = Mortgage(amount, rate, frequency, amortization)
             
             ### REQUIREMENT:
             ### PRINT THE MORTGAGE OBJECT
-
+            print(mortgage_var)
         except ValueError as e:
             # This except block will catch Explicit exceptions: 
             # Those raised by the programmer in the Mortgage class.
@@ -45,3 +47,5 @@ with open ("data\\pixell_river_mortgages.txt","r") as input:
             print(f"Data: {data.strip()} caused Exception: {e}")
         finally:
             print("**************************************************")
+except FileNotFoundError:
+    print("Error: File Not Found")
